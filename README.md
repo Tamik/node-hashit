@@ -221,7 +221,3 @@ map x 111,666 ops/sec ±2.27% (83 runs sampled)
 -   [node-object-hash](https://www.npmjs.com/package/node-object-hash) - Fast hasher with nice interface
 -   [object-hash](https://www.npmjs.com/package/object-hash) - Slow but popular hash lib, supports browser using
 -   [hash-object](https://www.npmjs.com/package/hash-object) - Old and not supporting lib, but useful for simple objects
-
-# License
-
-MIT
