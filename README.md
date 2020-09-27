@@ -1,4 +1,4 @@
-# node-hashit
+# node-hashit ![npm](https://img.shields.io/npm/v/node-hashit?color=brightgreen&label=version&style=flat) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/node-hashit?color=brightgreen&label=size)
 
 Fast Node.js hash library with sorting and typing. Provides [Hasher](#Hasher) class. [stringifyit](https://www.npmjs.com/package/stringifyit) provides [stringify Symbol](https://github.com/yarabey/stringifyit#stringifierstringify--symbol) to allow you [customize](https://github.com/yarabey/stringifyit#stringifierstringifycallback--function) stringifying your own classes.
 
