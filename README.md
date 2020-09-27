@@ -1,25 +1,30 @@
-# node-hashit
-Fast node.js hash library with sorting and typing. Provides [Hasher](#Hasher) class. [stringifyit](https://www.npmjs.com/package/stringifyit) provides [stringify Symbol](https://github.com/yarabey/stringifyit#stringifierstringify--symbol) to allow you [customize](https://github.com/yarabey/stringifyit#stringifierstringifycallback--function) stringifying your own classes.
+# node-hashit ![npm](https://img.shields.io/npm/v/node-hashit?color=brightgreen&label=version&style=flat) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/node-hashit?color=brightgreen&label=size)
 
-Using node.js `crypto` module and [stringifyit](https://www.npmjs.com/package/stringifyit) library. For browsers you can use [crypto-browserify](https://github.com/crypto-browserify/crypto-browserify) or only [stringifyit](https://www.npmjs.com/package/stringifyit) library.
+Fast Node.js hash library with sorting and typing. Provides [Hasher](#Hasher) class. [stringifyit](https://www.npmjs.com/package/stringifyit) provides [stringify Symbol](https://github.com/yarabey/stringifyit#stringifierstringify--symbol) to allow you [customize](https://github.com/yarabey/stringifyit#stringifierstringifycallback--function) stringifying your own classes.
+
+Using Node.js `crypto` module and [stringifyit](https://www.npmjs.com/package/stringifyit) library. For browsers you can use [crypto-browserify](https://github.com/crypto-browserify/crypto-browserify) or only [stringifyit](https://www.npmjs.com/package/stringifyit) library.
 
 See [benchmarks](#benchmarks) for compare to other libs.
 
-# Install
-`npm i node-hashit --save`
+## Install
 
-# Features
+```shell
+$ npm install node-hashit --save
+```
 
-- Supports node.js >= 4.0.0
-- Supports Map/WeakMap, Set/WeakSet and typed arrays
-- Supports algorithms and encodings from node.js `crypto` module
-- Supports sort Set, Map, object keys and optional sort arrays
-- Supports custom stringify rules for user-defined classes (provided by [stringifyit](https://www.npmjs.com/package/stringifyit) library)
-- One of the fastest hash libraries
+## Features
 
-# API
+-   Wrote on TypeScript;
+-   Supports Node.js >= 12.6.0;
+-   Supports `Map`/`WeakMap`, `Set`/`WeakSet` and typed arrays;
+-   Supports algorithms and encodings from Node.js `crypto` module;
+-   Supports sort `Set`, `Map`, object keys and optional sort arrays;
+-   Supports custom stringify rules for user-defined classes (provided by [stringifyit](https://www.npmjs.com/package/stringifyit) library);
+-   One of the fastest hash libraries;
 
-## Classes
+## API
+
+### Classes
 
 <dl>
 <dt><a href="#Hasher">Hasher</a></dt>
@@ -27,7 +32,7 @@ See [benchmarks](#benchmarks) for compare to other libs.
 </dd>
 </dl>
 
-## Functions
+### Functions
 
 <dl>
 <dt><a href="#hashit">hashit(value, [options])</a> ⇒ <code>string</code></dt>
@@ -37,89 +42,105 @@ See [benchmarks](#benchmarks) for compare to other libs.
 
 <a name="Hasher"></a>
 
-## Hasher
+### Hasher
+
 Provides interface to hash any value
 
-**Kind**: global class  
+**Kind**: global class
 
-* [Hasher](#Hasher)
-    * [new Hasher([options])](#new_Hasher_new)
-    * _instance_
-        * [.update(value, [inputEncoding])](#Hasher+update)
-        * [.digest([outputEncoding])](#Hasher+digest) ⇒ <code>string</code> &#124; <code>Buffer</code>
-    * _inner_
-        * [~options](#Hasher..options) : <code>Stringifier~options</code>
+-   [Hasher](#Hasher)
+    -   [new Hasher([options])](#new_Hasher_new)
+    -   _instance_
+        -   [.update(value, [inputEncoding])](#Hasher+update)
+        -   [.digest([outputEncoding])](#Hasher+digest) ⇒ <code>string</code> &#124; <code>Buffer</code>
+    -   _inner_
+        -   [~options](#Hasher..options) : <code>Stringifier~options</code>
 
 <a name="new_Hasher_new"></a>
 
-### new Hasher([options])
+#### new Hasher([options])
 
-| Param | Type |
-| --- | --- |
-| [options] | <code>[options](#Hasher..options)</code> | 
+| Param     | Type                                     |
+| --------- | ---------------------------------------- |
+| [options] | <code>[options](#Hasher..options)</code> |
 
 <a name="Hasher+update"></a>
 
-### hasher.update(value, [inputEncoding])
+#### hasher.update(value, [inputEncoding])
+
 Updates hash with stringified value
 
-**Kind**: instance method of <code>[Hasher](#Hasher)</code>  
+**Kind**: instance method of <code>[Hasher](#Hasher)</code>
 **Throws**:
 
-- <code>HashitRangeError</code> 
+-   <code>HashitRangeError</code>
 
-
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>\*</code> |  |
+| Param           | Type                | Description    |
+| --------------- | ------------------- | -------------- |
+| value           | <code>\*</code>     |                |
 | [inputEncoding] | <code>string</code> | Input encoding |
 
 <a name="Hasher+digest"></a>
 
-### hasher.digest([outputEncoding]) ⇒ <code>string</code> &#124; <code>Buffer</code>
-**Kind**: instance method of <code>[Hasher](#Hasher)</code>  
-**See**: [https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)  
+#### hasher.digest([outputEncoding]) ⇒ <code>string</code> &#124; <code>Buffer</code>
 
-| Param | Type | Description |
-| --- | --- | --- |
+**Kind**: instance method of <code>[Hasher](#Hasher)</code>
+**See**: [https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)
+
+| Param            | Type                | Description                                         |
+| ---------------- | ------------------- | --------------------------------------------------- |
 | [outputEncoding] | <code>string</code> | Output encoding (if `null` Buffer will be returned) |
 
 <a name="Hasher..options"></a>
 
-### Hasher~options : <code>Stringifier~options</code>
-**Kind**: inner typedef of <code>[Hasher](#Hasher)</code>  
+#### Hasher~options : <code>Stringifier~options</code>
+
+**Kind**: inner typedef of <code>[Hasher](#Hasher)</code>
 **See**
 
-- [https://nodejs.org/api/crypto.html#crypto_class_hash](https://nodejs.org/api/crypto.html#crypto_class_hash)
-- [https://github.com/yarabey/stringifyit#stringifieroptions--object](https://github.com/yarabey/stringifyit#stringifieroptions--object)
+-   [https://nodejs.org/api/crypto.html#crypto_class_hash](https://nodejs.org/api/crypto.html#crypto_class_hash)
+-   [https://github.com/yarabey/stringifyit#stringifieroptions--object](https://github.com/yarabey/stringifyit#stringifieroptions--object)
 
 **Properties**
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| algorithm | <code>string</code> | <code>&quot;md5&quot;</code> | Hash algorithm |
-| inputEncoding | <code>string</code> | <code>&quot;utf8&quot;</code> | Input encoding |
-| outputEncoding | <code>string</code> | <code>&quot;hex&quot;</code> | Output encoding (if `null` Buffer will be returned) |
+| Name           | Type                | Default                       | Description                                         |
+| -------------- | ------------------- | ----------------------------- | --------------------------------------------------- |
+| algorithm      | <code>string</code> | <code>&quot;md5&quot;</code>  | Hash algorithm                                      |
+| inputEncoding  | <code>string</code> | <code>&quot;utf8&quot;</code> | Input encoding                                      |
+| outputEncoding | <code>string</code> | <code>&quot;hex&quot;</code>  | Output encoding (if `null` Buffer will be returned) |
 
 <a name="hashit"></a>
 
-## hashit(value, [options]) ⇒ <code>string</code>
+### hashit(value, [options]) ⇒ <code>string</code>
+
 Helper for simple hash single value
 
-**Kind**: global function  
+**Kind**: global function
 
-| Param | Type |
-| --- | --- |
-| value | <code>\*</code> | 
-| [options] | <code>[options](#Hasher..options)</code> | 
+| Param     | Type                                     |
+| --------- | ---------------------------------------- |
+| value     | <code>\*</code>                          |
+| [options] | <code>[options](#Hasher..options)</code> |
 
-**Example**  
-```js
-const {hashit} = require('node-hashit');
+**Example**
+
+```typescript
+import {hashit} from 'node-hashit';
 
 hashit({key: 'value', value: 'key'}) === hashit({value: 'key', key: 'value'}); // true
 hashit(new Set(['value1', 'value2'])) === hashit(new Set(['value2', 'value1'])); // true
-hashit(new Map([['key', 'value'], ['value', 'key']])) === hashit(new Map([['value', 'key'], ['key', 'value']])); // true
+hashit(
+    new Map<string, string>([
+        ['key', 'value'],
+        ['value', 'key'],
+    ]),
+) ===
+    hashit(
+        new Map<string, string>([
+            ['value', 'key'],
+            ['key', 'value'],
+        ]),
+    ); // true
 hashit([1, 2, 3]) === hashit([1, 2, 3]); // true
 hashit([1, 2, 3], {sortArrays: true}) === hashit([1, 3, 2], {sortArrays: true}); // true
 
@@ -129,13 +150,13 @@ hashit(5) === hashit('5'); // false
 
 # Benchmarks
 
-Benchmarked with Node.js v6.9.5
+Benchmarked with Node.js v12.6
 
 ## Usage
 
-* `npm run benchOps` to run comparison operations/second with other libs for different cases
-* `npm run benchHeap` to run comparison heap using with other libs for complex cases
-* `npm run benchSpeed` to run benchmarking hashit operations/second for different cases
+-   `npm run bench:ops` to run comparison operations/second with other libs for different cases
+-   `npm run bench:heap` to run comparison heap using with other libs for complex cases
+-   `npm run bench:speed` to run benchmarking hashit operations/second for different cases
 
 ## Results
 
@@ -173,17 +194,16 @@ hashObject/complexObject_100items x 129 ops/sec ±1.35% (70 runs sampled)
 objectHash/complexObject_100items x 66.61 ops/sec ±1.44% (65 runs sampled)
 
 hashit faster in cases: array, object, nestedObject, complexObject_5items, complexObject_10items, complexObject_100items (6)
-
 ```
 
-### Heap using comparison  (+includePrimitiveTypes +sortArrays) [source](bench/heap.js)
+### Heap using comparison (+includePrimitiveTypes +sortArrays) [source](bench/heap.js)
 
-| Library                               | Time (ms)  | Memory (Mb)        |
-|---------------------------------------|------------|--------------------|
-| hashit-0.3.2                          | 2120.435   | 42                 |
-| node-object-hash-1.2.0                | 2635.670   | 39                 |
-| object-hash-1.1.5                     | 17325.391  | 62                 |
-| hash-object-0.1.7                     | 9762.324   | 51                 |
+| Library                | Time (ms) | Memory (Mb) |
+| ---------------------- | --------- | ----------- |
+| hashit-0.3.2           | 2120.435  | 42          |
+| node-object-hash-1.2.0 | 2635.670  | 39          |
+| object-hash-1.1.5      | 17325.391 | 62          |
+| hash-object-0.1.7      | 9762.324  | 51          |
 
 ### Operations/second hashit benchmarking (+includePrimitiveTypes -sortArrays) [source](bench/speed.js)
 
@@ -200,10 +220,6 @@ map x 111,666 ops/sec ±2.27% (83 runs sampled)
 
 ## Links
 
-* [node-object-hash](https://www.npmjs.com/package/node-object-hash) - Fast hasher with nice interface
-* [object-hash](https://www.npmjs.com/package/object-hash) - Slow but popular hash lib, supports browser using
-* [hash-object](https://www.npmjs.com/package/hash-object) - Old and not supporting lib, but useful for simple objects
-
-
-# License
-MIT
+-   [node-object-hash](https://www.npmjs.com/package/node-object-hash) - Fast hasher with nice interface
+-   [object-hash](https://www.npmjs.com/package/object-hash) - Slow but popular hash lib, supports browser using
+-   [hash-object](https://www.npmjs.com/package/hash-object) - Old and not supporting lib, but useful for simple objects
