@@ -54,6 +54,7 @@
         "jsdoc-to-markdown": "^3.0.0",
         "node-object-hash": "^1.1.6",
         "object-hash": "^1.1.5",
+        "ts-jest": "^26.4.0",
         "typescript": "^4.0.3"
     }
 }
