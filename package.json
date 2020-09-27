@@ -36,7 +36,6 @@
         "test:watch": "jest --verbose --watch",
         "test:ci": "jest --ci --json",
         "test": "jest --verbose",
-        "docs": "jsdoc2md index.js -t docs/readme-template.md > README.md",
         "benchOps": "node --expose-gc ./bench/ops.js",
         "benchHeap": "node --expose-gc ./bench/heap.js",
         "benchSpeed": "node --expose-gc ./bench/speed.js"
