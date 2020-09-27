@@ -1,5 +1,5 @@
 import {stringifyit} from 'stringifyit';
-import {StringifierRangeError} from 'stringifyit';
+import {StringifierRangeError} from 'stringifyit/errors';
 
 import {HashitRangeError} from '../errors';
 
