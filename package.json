@@ -42,7 +42,7 @@
         "bench": "npm run bench:speed && npm run bench:heap && npm run bench:ops"
     },
     "engines": {
-        "node": ">=4.0.0"
+        "node": ">=12.6"
     },
     "dependencies": {
         "stringifyit": "github:Tamik/stringifyit#staging-branch"
