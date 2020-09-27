@@ -36,7 +36,6 @@
         "test:watch": "jest --verbose --watch",
         "test:ci": "jest --ci --json",
         "test": "jest --verbose",
-        "docs": "jsdoc2md index.js -t docs/readme-template.md > README.md",
         "benchOps": "node --expose-gc ./bench/ops.js",
         "benchHeap": "node --expose-gc ./bench/heap.js",
         "benchSpeed": "node --expose-gc ./bench/speed.js"
@@ -54,7 +53,6 @@
         "faker": "^3.1.0",
         "hash-object": "^0.1.7",
         "jest": "^26.4.2",
-        "jsdoc-to-markdown": "^3.0.0",
         "node-object-hash": "^1.1.6",
         "object-hash": "^1.1.5",
         "ts-jest": "^26.4.0",
