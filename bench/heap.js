@@ -2,26 +2,33 @@
 
 const faker = require('faker');
 
-const nodeObjectHashParams = {alg: 'md5', coerce: false};
+const nodeObjectHashParams = {
+    alg: 'md5',
+    coerce: false,
+};
 
-const hashit = require('..').hashit;
 const hashObject = require('hash-object');
 const objectHash = require('object-hash').MD5;
 const nodeObjectHash = require('node-object-hash')(nodeObjectHashParams).hash;
 
+const {hashit} = require('../dist/cjs');
+
 let itemsCount = 100000;
 
-let testCases = {
-    nestedObject: deepThrow({
-        a: 'rwter'
-    }, 100),
+const testCases = {
+    nestedObject: deepThrow(
+        {
+            a: 'rwter',
+        },
+        100,
+    ),
     complexObject1: [],
     complexObject2: [],
     complexObject3: [],
     complexObject4: [],
 };
 
-while (itemsCount --> 0) {
+while (itemsCount-- > 0) {
     testCases.complexObject1.push(getFakeRealData());
     testCases.complexObject2.push(getFakeRealData());
     testCases.complexObject3.push(getFakeRealData());
@@ -32,13 +39,16 @@ while (itemsCount --> 0) {
 const hashitParams = {sortArrays: true, includePrimitiveTypes: true};
 
 console.log(`Warming up...`);
+
 for (const complexObject of new Array(10000).fill(1).reduce(acc => acc.concat(getFakeRealData()), [])) {
     warmUp(hashit, hashitParams, 1, complexObject);
+
     warmUp(nodeObjectHash, nodeObjectHashParams, 1, complexObject);
+
     warmUp(hashObject, null, 1, complexObject);
+
     warmUp(objectHash, null, 1, complexObject);
 }
-
 
 console.log('Collecting garbage...');
 gc();
@@ -60,7 +70,11 @@ testCases.complexObject1.forEach((it, idx) => {
         if (memMaxHeap < memStats.heapUsed) {
             memMaxHeap = memStats.heapUsed;
         }
-        console.log(`${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(memStats.heapUsed / (1024 * 1024))}Mb`)
+        console.log(
+            `${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(
+                memStats.heapUsed / (1024 * 1024),
+            )}Mb`,
+        );
     }
 });
 bigHash = hashit(testCases.nestedObject, hashitParams);
@@ -84,7 +98,11 @@ testCases.complexObject2.forEach((it, idx) => {
         if (memMaxHeap < memStats.heapUsed) {
             memMaxHeap = memStats.heapUsed;
         }
-        console.log(`${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(memStats.heapUsed / (1024 * 1024))}Mb`)
+        console.log(
+            `${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(
+                memStats.heapUsed / (1024 * 1024),
+            )}Mb`,
+        );
     }
 });
 bigHash = nodeObjectHash(testCases.nestedObject, nodeObjectHashParams);
@@ -109,7 +127,11 @@ testCases.complexObject3.forEach((it, idx) => {
         if (memMaxHeap < memStats.heapUsed) {
             memMaxHeap = memStats.heapUsed;
         }
-        console.log(`${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(memStats.heapUsed / (1024 * 1024))}Mb`)
+        console.log(
+            `${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(
+                memStats.heapUsed / (1024 * 1024),
+            )}Mb`,
+        );
     }
 });
 bigHash = hashObject(testCases.nestedObject, hashObjectOpts);
@@ -133,7 +155,11 @@ testCases.complexObject4.forEach((it, idx) => {
         if (memMaxHeap < memStats.heapUsed) {
             memMaxHeap = memStats.heapUsed;
         }
-        console.log(`${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(memStats.heapUsed / (1024 * 1024))}Mb`)
+        console.log(
+            `${idx} items processed: RSS:${Math.round(memStats.rss / (1024 * 1024))}Mb / HEAP: ${Math.round(
+                memStats.heapUsed / (1024 * 1024),
+            )}Mb`,
+        );
     }
 });
 bigHash = objectHash(testCases.nestedObject, {algorithm: 'sha256', encoding: 'hex', unorderedArrays: true});
@@ -146,7 +172,7 @@ console.log(`Memory footprint:\n MAX HEAP DIFF:${Math.round((memMaxHeap - memHea
 function warmUp(func, params, times, testData) {
     let result;
 
-    while (times --> 0) {
+    while (times-- > 0) {
         result = func(testData, params);
     }
 
@@ -154,9 +180,9 @@ function warmUp(func, params, times, testData) {
 }
 
 function deepThrow(object, depth) {
-    while (depth --> 0) {
+    while (depth-- > 0) {
         let tmp = {
-            object: object
+            object: object,
         };
         object = tmp;
     }
@@ -170,36 +196,34 @@ function getFakeRealData() {
         address: {
             city: faker.address.city(),
             streetAddress: faker.address.streetAddress(),
-            country: faker.address.country()
+            country: faker.address.country(),
         },
-        email: [
-            faker.internet.email(),
-            faker.internet.email(),
-            faker.internet.email(),
-            faker.internet.email()
-        ],
+        email: [faker.internet.email(), faker.internet.email(), faker.internet.email(), faker.internet.email()],
         randoms: [
             faker.random.number(),
             faker.random.alphaNumeric(),
             faker.random.number(),
             faker.random.alphaNumeric(),
             faker.random.words(),
-            faker.random.word()
+            faker.random.word(),
         ],
         avatars: [
             {
                 number: faker.random.number(),
-                avatar: faker.internet.avatar()
-            }, {
+                avatar: faker.internet.avatar(),
+            },
+            {
                 number: faker.random.number(),
-                avatar: faker.internet.avatar()
-            }, {
+                avatar: faker.internet.avatar(),
+            },
+            {
                 number: faker.random.number(),
-                avatar: faker.internet.avatar()
-            }, {
+                avatar: faker.internet.avatar(),
+            },
+            {
                 number: faker.random.number(),
-                avatar: faker.internet.avatar()
-            }
-        ]
+                avatar: faker.internet.avatar(),
+            },
+        ],
     };
 }

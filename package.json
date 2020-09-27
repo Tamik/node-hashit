@@ -36,9 +36,10 @@
         "test:watch": "jest --verbose --watch",
         "test:ci": "jest --ci --json",
         "test": "jest --verbose",
-        "benchOps": "node --expose-gc ./bench/ops.js",
-        "benchHeap": "node --expose-gc ./bench/heap.js",
-        "benchSpeed": "node --expose-gc ./bench/speed.js"
+        "bench:speed": "node --expose-gc ./bench/speed.js",
+        "bench:heap": "node --expose-gc ./bench/heap.js",
+        "bench:ops": "node --expose-gc ./bench/ops.js",
+        "bench": "npm run bench:speed && npm run bench:heap && npm run bench:ops"
     },
     "engines": {
         "node": ">=4.0.0"
