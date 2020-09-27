@@ -6,11 +6,11 @@ Using node.js `crypto` module and [stringifyit](https://www.npmjs.com/package/st
 
 See [benchmarks](#benchmarks) for compare to other libs.
 
-# Install
+## Install
 
 `npm i node-hashit --save`
 
-# Features
+## Features
 
 -   Supports node.js >= 4.0.0
 -   Supports Map/WeakMap, Set/WeakSet and typed arrays
@@ -19,9 +19,9 @@ See [benchmarks](#benchmarks) for compare to other libs.
 -   Supports custom stringify rules for user-defined classes (provided by [stringifyit](https://www.npmjs.com/package/stringifyit) library)
 -   One of the fastest hash libraries
 
-# API
+## API
 
-## Classes
+### Classes
 
 <dl>
 <dt><a href="#Hasher">Hasher</a></dt>
@@ -29,7 +29,7 @@ See [benchmarks](#benchmarks) for compare to other libs.
 </dd>
 </dl>
 
-## Functions
+### Functions
 
 <dl>
 <dt><a href="#hashit">hashit(value, [options])</a> ⇒ <code>string</code></dt>
@@ -39,7 +39,7 @@ See [benchmarks](#benchmarks) for compare to other libs.
 
 <a name="Hasher"></a>
 
-## Hasher
+### Hasher
 
 Provides interface to hash any value
 
@@ -55,7 +55,7 @@ Provides interface to hash any value
 
 <a name="new_Hasher_new"></a>
 
-### new Hasher([options])
+#### new Hasher([options])
 
 | Param     | Type                                     |
 | --------- | ---------------------------------------- |
@@ -63,7 +63,7 @@ Provides interface to hash any value
 
 <a name="Hasher+update"></a>
 
-### hasher.update(value, [inputEncoding])
+#### hasher.update(value, [inputEncoding])
 
 Updates hash with stringified value
 
@@ -79,7 +79,7 @@ Updates hash with stringified value
 
 <a name="Hasher+digest"></a>
 
-### hasher.digest([outputEncoding]) ⇒ <code>string</code> &#124; <code>Buffer</code>
+#### hasher.digest([outputEncoding]) ⇒ <code>string</code> &#124; <code>Buffer</code>
 
 **Kind**: instance method of <code>[Hasher](#Hasher)</code>
 **See**: [https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)
@@ -90,7 +90,7 @@ Updates hash with stringified value
 
 <a name="Hasher..options"></a>
 
-### Hasher~options : <code>Stringifier~options</code>
+#### Hasher~options : <code>Stringifier~options</code>
 
 **Kind**: inner typedef of <code>[Hasher](#Hasher)</code>
 **See**
@@ -108,7 +108,7 @@ Updates hash with stringified value
 
 <a name="hashit"></a>
 
-## hashit(value, [options]) ⇒ <code>string</code>
+### hashit(value, [options]) ⇒ <code>string</code>
 
 Helper for simple hash single value
 
@@ -121,19 +121,19 @@ Helper for simple hash single value
 
 **Example**
 
-```js
-const {hashit} = require('node-hashit');
+```typescript
+import {hashit} from 'node-hashit';
 
 hashit({key: 'value', value: 'key'}) === hashit({value: 'key', key: 'value'}); // true
 hashit(new Set(['value1', 'value2'])) === hashit(new Set(['value2', 'value1'])); // true
 hashit(
-    new Map([
+    new Map<string, string>([
         ['key', 'value'],
         ['value', 'key'],
     ]),
 ) ===
     hashit(
-        new Map([
+        new Map<string, string>([
             ['value', 'key'],
             ['key', 'value'],
         ]),
@@ -147,13 +147,13 @@ hashit(5) === hashit('5'); // false
 
 # Benchmarks
 
-Benchmarked with Node.js v6.9.5
+Benchmarked with Node.js v12.6
 
 ## Usage
 
--   `npm run benchOps` to run comparison operations/second with other libs for different cases
--   `npm run benchHeap` to run comparison heap using with other libs for complex cases
--   `npm run benchSpeed` to run benchmarking hashit operations/second for different cases
+-   `npm run bench:ops` to run comparison operations/second with other libs for different cases
+-   `npm run bench:heap` to run comparison heap using with other libs for complex cases
+-   `npm run bench:speed` to run benchmarking hashit operations/second for different cases
 
 ## Results
 
@@ -191,7 +191,6 @@ hashObject/complexObject_100items x 129 ops/sec ±1.35% (70 runs sampled)
 objectHash/complexObject_100items x 66.61 ops/sec ±1.44% (65 runs sampled)
 
 hashit faster in cases: array, object, nestedObject, complexObject_5items, complexObject_10items, complexObject_100items (6)
-
 ```
 
 ### Heap using comparison (+includePrimitiveTypes +sortArrays) [source](bench/heap.js)
