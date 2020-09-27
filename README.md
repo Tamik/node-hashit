@@ -1,23 +1,26 @@
 # node-hashit
 
-Fast node.js hash library with sorting and typing. Provides [Hasher](#Hasher) class. [stringifyit](https://www.npmjs.com/package/stringifyit) provides [stringify Symbol](https://github.com/yarabey/stringifyit#stringifierstringify--symbol) to allow you [customize](https://github.com/yarabey/stringifyit#stringifierstringifycallback--function) stringifying your own classes.
+Fast Node.js hash library with sorting and typing. Provides [Hasher](#Hasher) class. [stringifyit](https://www.npmjs.com/package/stringifyit) provides [stringify Symbol](https://github.com/yarabey/stringifyit#stringifierstringify--symbol) to allow you [customize](https://github.com/yarabey/stringifyit#stringifierstringifycallback--function) stringifying your own classes.
 
-Using node.js `crypto` module and [stringifyit](https://www.npmjs.com/package/stringifyit) library. For browsers you can use [crypto-browserify](https://github.com/crypto-browserify/crypto-browserify) or only [stringifyit](https://www.npmjs.com/package/stringifyit) library.
+Using Node.js `crypto` module and [stringifyit](https://www.npmjs.com/package/stringifyit) library. For browsers you can use [crypto-browserify](https://github.com/crypto-browserify/crypto-browserify) or only [stringifyit](https://www.npmjs.com/package/stringifyit) library.
 
 See [benchmarks](#benchmarks) for compare to other libs.
 
 ## Install
 
-`npm i node-hashit --save`
+```shell
+$ npm install node-hashit --save
+```
 
 ## Features
 
--   Supports node.js >= 4.0.0
--   Supports Map/WeakMap, Set/WeakSet and typed arrays
--   Supports algorithms and encodings from node.js `crypto` module
--   Supports sort Set, Map, object keys and optional sort arrays
--   Supports custom stringify rules for user-defined classes (provided by [stringifyit](https://www.npmjs.com/package/stringifyit) library)
--   One of the fastest hash libraries
+-   Wrote on TypeScript;
+-   Supports node.js >= 12.0;
+-   Supports `Map`/`WeakMap`, `Set`/`WeakSet` and typed arrays;
+-   Supports algorithms and encodings from Node.js `crypto` module;
+-   Supports sort `Set`, `Map`, object keys and optional sort arrays;
+-   Supports custom stringify rules for user-defined classes (provided by [stringifyit](https://www.npmjs.com/package/stringifyit) library);
+-   One of the fastest hash libraries;
 
 ## API
 
