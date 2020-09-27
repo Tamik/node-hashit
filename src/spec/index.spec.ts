@@ -1,43 +1,83 @@
-'use strict';
+import {HashitRangeError} from '../errors';
+import type {HasherOptions} from '../Hasher';
+import {hashit} from '../index';
 
-const Hashit = require('.');
-const HashitRangeError = require('./error').HashitRangeError;
+function checkHashesEquality(testCase: any, shouldBeEqual: boolean, params?: HasherOptions): void {
+    const digest1 = hashit(testCase[0], Object.assign({outputEncoding: 'hex'}, params));
+    const digest2 = hashit(testCase[1], Object.assign({outputEncoding: 'hex'}, params));
 
-const hashit = Hashit.hashit;
+    if (shouldBeEqual) {
+        expect(digest1).toBe(digest2);
+    } else {
+        expect(digest1).not.toBe(digest2);
+    }
+}
 
 const testCases = {
     map: [
-        new Map([[{a: 5}, 1], [new Map([[2, 2], [{hfg: {hghg: 65}}, 1], [3, 3]]), 'fgh'], [new Map([[2, 2], [{hfg: {gdfd: 65}}, 1], [3, 3]]), 2], [{}, 3]]),
-        new Map([[{}, 3], [{a: 5}, 1], [new Map([[2, 2], [{hfg: {gdfd: 65}}, 1], [3, 3]]), 2], [new Map([[2, 2], [{hfg: {hghg: 65}}, 1], [3, 3]]), 'fgh']])
+        new Map<any, any>([
+            [{a: 5}, 1],
+            [
+                new Map<any, any>([
+                    [2, 2],
+                    [{hfg: {hghg: 65}}, 1],
+                    [3, 3],
+                ]),
+                'fgh',
+            ],
+            [
+                new Map<any, any>([
+                    [2, 2],
+                    [{hfg: {gdfd: 65}}, 1],
+                    [3, 3],
+                ]),
+                2,
+            ],
+            [{}, 3],
+        ]),
+        new Map<any, any>([
+            [{}, 3],
+            [{a: 5}, 1],
+            [
+                new Map<any, any>([
+                    [2, 2],
+                    [{hfg: {gdfd: 65}}, 1],
+                    [3, 3],
+                ]),
+                2,
+            ],
+            [
+                new Map<any, any>([
+                    [2, 2],
+                    [{hfg: {hghg: 65}}, 1],
+                    [3, 3],
+                ]),
+                'fgh',
+            ],
+        ]),
     ],
     set: [
         new Set([{a: 5}, 2, new Set([{a: {b: 5}}, 2, 3, {}, 5]), {}, 5]),
-        new Set([new Set([{a: {b: 5}}, 2, 3, {}, 5]), {}, 2, {a: 5}, 5])
+        new Set([new Set([{a: {b: 5}}, 2, 3, {}, 5]), {}, 2, {a: 5}, 5]),
     ],
-    array: [
-        [5, 4, 3, 2, 1, 0],
-        new Uint16Array([5, 4, 3, 2, 1, 0])
-    ],
+    array: [[5, 4, 3, 2, 1, 0], new Uint16Array([5, 4, 3, 2, 1, 0])],
     object: [
         {a: 'a', b: 'b'},
-        {b: 'b', a: 'a'}
+        {b: 'b', a: 'a'},
     ],
     nestedObject: [
         {a: 'a', b: {a: 1}},
-        {a: 'a', b: {a: 2}}
+        {a: 'a', b: {a: 2}},
     ],
     unorderedArray: [
         [5, 4, 3, 2, 1, 0],
-        [0, 5, 4, 3, 2, 1]
+        [0, 5, 4, 3, 2, 1],
     ],
     types: [
         ['1', '2', '3'],
-        [1, 2, 3]
+        [1, 2, 3],
     ],
-    objectNull: [
-        Object.create(null),
-        Object.create(null)
-    ],
+    objectNull: [Object.create(null), Object.create(null)],
     complex: [
         {
             a: 1,
@@ -45,19 +85,23 @@ const testCases = {
             c: 3,
             d: {
                 e: 4,
-                f: 5
+                f: 5,
             },
             g: 0,
             h: undefined,
             i: null,
             j: new Set([1, 2, 3, 4, 5]),
-            k: new Map([[1, 1], [2, 2], [3, 3]]),
+            k: new Map([
+                [1, 1],
+                [2, 2],
+                [3, 3],
+            ]),
             l: new Date(0),
             m: Symbol(),
             n: function n() {
                 return 'n';
             },
-            o: [5, 4, 3, 2, 1, 0]
+            o: [5, 4, 3, 2, 1, 0],
         },
         {
             a: 1,
@@ -65,21 +109,25 @@ const testCases = {
             b: 2,
             d: {
                 f: 5,
-                e: 4
+                e: 4,
             },
             g: 0,
             h: undefined,
             i: null,
             j: new Set([3, 1, 2, 5, 4]),
-            k: new Map([[2, 2], [1, 1], [3, 3]]),
+            k: new Map([
+                [2, 2],
+                [1, 1],
+                [3, 3],
+            ]),
             l: new Date(0),
             m: Symbol(),
             n: function n() {
                 return 'n';
             },
-            o: [5, 4, 3, 2, 1, 0]
-        }
-    ]
+            o: [5, 4, 3, 2, 1, 0],
+        },
+    ],
 };
 
 describe('Hashit', () => {
@@ -124,20 +172,10 @@ describe('Hashit', () => {
     });
 
     it('should throw StringifierRangeError for cycled object', () => {
-        const data = {};
+        const data: any = {};
+
         data.data = data;
 
         expect(hashit.bind(null, data, {outputEncoding: 'hex'})).toThrowError(HashitRangeError);
     });
 });
-
-function checkHashesEquality(testCase, shouldBeEqual, params) {
-    const digest1 = hashit(testCase[0], Object.assign({outputEncoding: 'hex'}, params));
-    const digest2 = hashit(testCase[1], Object.assign({outputEncoding: 'hex'}, params));
-
-    if (shouldBeEqual) {
-        expect(digest1).toBe(digest2);
-    } else {
-        expect(digest1).not.toBe(digest2);
-    }
-}
