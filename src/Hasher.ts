@@ -3,9 +3,9 @@ import type {StringifierOptions} from 'stringifyit';
 
 import {stringifyValue} from './utils';
 
-const DEFAULT_ALGORITHM = 'md5';
-const DEFAULT_INPUT_ENCODING = 'utf8';
-const DEFAULT_OUTPUT_ENCODING = 'hex';
+const DEFAULT_ALGORITHM: string = 'md5';
+const DEFAULT_INPUT_ENCODING: Utf8AsciiLatin1Encoding = 'utf8';
+const DEFAULT_OUTPUT_ENCODING: HexBase64Latin1Encoding = 'hex';
 
 export type HasherOptions = StringifierOptions & {
     /**
@@ -51,7 +51,7 @@ class Hasher {
     /**
      * @see {@link https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding}
      */
-    public digest(outputEncoding?: HexBase64Latin1Encoding): Buffer | string {
+    public digest(outputEncoding?: HexBase64Latin1Encoding): string {
         const encoding = outputEncoding || this.options.outputEncoding;
 
         return this.hasher.digest(encoding || encoding === null ? encoding : DEFAULT_OUTPUT_ENCODING);

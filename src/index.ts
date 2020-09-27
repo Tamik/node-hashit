@@ -20,7 +20,7 @@ export function hashit(value: unknown, options?: HasherOptions): string {
 
     hasher.update(value);
 
-    return hasher.digest() as string;
+    return hasher.digest();
 }
 
 export default Hasher;
