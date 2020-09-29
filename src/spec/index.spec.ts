@@ -1,6 +1,6 @@
+import type {HasherOptions} from '../types';
 import {HashitRangeError} from '../errors';
-import type {HasherOptions} from '../Hasher';
-import {hashit} from '../index';
+import hashit from '../hashit';
 
 function checkHashesEquality(testCase: any, shouldBeEqual: boolean, params?: HasherOptions): void {
     const digest1 = hashit(testCase[0], Object.assign({outputEncoding: 'hex'}, params));
@@ -130,7 +130,7 @@ const testCases = {
     ],
 };
 
-describe('Hashit', () => {
+describe('hashit', () => {
     it('should order Maps', () => {
         checkHashesEquality(testCases.map, true);
     });
