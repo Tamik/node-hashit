@@ -1,31 +1,16 @@
 import crypto, {Hash, HexBase64Latin1Encoding, Utf8AsciiLatin1Encoding} from 'crypto';
-import type {StringifierOptions} from 'stringifyit';
 
+import type {HasherOptions, IHasher} from './types';
 import {stringifyValue} from './utils';
 
 const DEFAULT_ALGORITHM: string = 'md5';
 const DEFAULT_INPUT_ENCODING: Utf8AsciiLatin1Encoding = 'utf8';
 const DEFAULT_OUTPUT_ENCODING: HexBase64Latin1Encoding = 'hex';
 
-export type HasherOptions = StringifierOptions & {
-    /**
-     * Hash algorithm.
-     */
-    algorithm?: string;
-    /**
-     * Input encoding.
-     */
-    inputEncoding?: Utf8AsciiLatin1Encoding;
-    /**
-     * Output encoding. If `null` Buffer will be returned.
-     */
-    outputEncoding?: HexBase64Latin1Encoding;
-};
-
 /**
  * Provides an interface to hash any value.
  */
-class Hasher {
+class Hasher implements IHasher {
     public options: HasherOptions;
     public hasher: Hash;
 
