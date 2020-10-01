@@ -124,19 +124,19 @@ Helper for simple hash single value
 
 **Example**
 
-```typescript
+```javascript
 import {hashit} from 'node-hashit';
 
 hashit({key: 'value', value: 'key'}) === hashit({value: 'key', key: 'value'}); // true
 hashit(new Set(['value1', 'value2'])) === hashit(new Set(['value2', 'value1'])); // true
 hashit(
-    new Map<string, string>([
+    new Map([
         ['key', 'value'],
         ['value', 'key'],
     ]),
 ) ===
     hashit(
-        new Map<string, string>([
+        new Map([
             ['value', 'key'],
             ['key', 'value'],
         ]),
@@ -150,13 +150,13 @@ hashit(5) === hashit('5'); // false
 
 # Benchmarks
 
-Benchmarked with Node.js v12.6
+Benchmarked with Node.js v12.6.
 
 ## Usage
 
--   `npm run bench:ops` to run comparison operations/second with other libs for different cases
--   `npm run bench:heap` to run comparison heap using with other libs for complex cases
--   `npm run bench:speed` to run benchmarking hashit operations/second for different cases
+-   `npm run bench:ops` to run comparison operations/second with other libs for different cases;
+-   `npm run bench:heap` to run comparison heap using with other libs for complex cases;
+-   `npm run bench:speed` to run benchmarking hashit operations/second for different cases.
 
 ## Results
 
