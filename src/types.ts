@@ -5,20 +5,20 @@ export type HasherOptions = StringifierOptions & {
     /**
      * Hash algorithm.
      */
-    algorithm?: string;
+    readonly algorithm?: string;
     /**
      * Input encoding.
      */
-    inputEncoding?: Utf8AsciiLatin1Encoding;
+    readonly inputEncoding?: Utf8AsciiLatin1Encoding;
     /**
      * Output encoding. If `null` Buffer will be returned.
      */
-    outputEncoding?: HexBase64Latin1Encoding;
+    readonly outputEncoding?: HexBase64Latin1Encoding;
 };
 
 export interface IHasher {
-    options: HasherOptions;
-    hasher: Hash;
+    readonly options: HasherOptions;
+    readonly hasher: Hash;
 
     update(value: unknown, inputEncoding?: Utf8AsciiLatin1Encoding): void;
 
