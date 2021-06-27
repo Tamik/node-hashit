@@ -1,26 +1,41 @@
-import type {Hash, HexBase64Latin1Encoding, Utf8AsciiLatin1Encoding} from 'crypto';
+import type {Hash, BinaryToTextEncoding, CharacterEncoding} from 'crypto';
 import type {StringifierOptions} from 'stringifyit';
 
 export type HasherOptions = StringifierOptions & {
     /**
      * Hash algorithm.
      */
-    algorithm?: string;
+    readonly algorithm?: string;
+
     /**
      * Input encoding.
      */
-    inputEncoding?: Utf8AsciiLatin1Encoding;
+    readonly inputEncoding?: CharacterEncoding;
+
     /**
      * Output encoding. If `null` Buffer will be returned.
      */
-    outputEncoding?: HexBase64Latin1Encoding;
+    readonly outputEncoding?: BinaryToTextEncoding;
 };
 
 export interface IHasher {
-    options: HasherOptions;
-    hasher: Hash;
+    /**
+     * Hasher options.
+     */
+    readonly options: HasherOptions;
 
-    update(value: unknown, inputEncoding?: Utf8AsciiLatin1Encoding): void;
+    /**
+     * Accumulative buffer.
+     */
+    readonly hasher: Hash;
 
-    digest(outputEncoding?: HexBase64Latin1Encoding): string;
+    /**
+     * Updates hash with stringified value.
+     */
+    update(value: unknown, inputEncoding?: CharacterEncoding): void;
+
+    /**
+     * @see {@link https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding}
+     */
+    digest(outputEncoding?: BinaryToTextEncoding): string;
 }
