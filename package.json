@@ -1,0 +1,65 @@
+{
+    "name": "node-hashit",
+    "description": "Node.js object hash library",
+    "version": "0.4.0",
+    "main": "./cjs/index.js",
+    "module": "./esm/index.js",
+    "author": {
+        "name": "Sergey Vasilenko",
+        "email": "savstav@gmail.com",
+        "url": "https://github.com/yarabey"
+    },
+    "license": "MIT",
+    "keywords": [
+        "hasher",
+        "hash",
+        "stringify",
+        "object",
+        "crypto",
+        "es6"
+    ],
+    "homepage": "https://github.com/yarabey/node-hashit",
+    "bugs": {
+        "url": "https://github.com/yarabey/node-hashit/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:yarabey/node-hashit.git"
+    },
+    "scripts": {
+        "clean": "rm -rf ./dist ./coverage ./reports ./jest.results.json",
+        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build:esm": "tsc -p tsconfig.esm.json",
+        "build": "npm run build:cjs && npm run build:esm",
+        "copy:package": "cp ./package.json ./dist/",
+        "pack": "npm run clean && npm run build && npm run copy:package",
+        "publish:git": "npm run pack && gh-pages -d dist -b staging-branch",
+        "test:watch": "jest --verbose --watch",
+        "test:ci": "jest --ci --json",
+        "test": "jest --verbose",
+        "bench:speed": "node --expose-gc ./bench/speed.js",
+        "bench:heap": "node --expose-gc ./bench/heap.js",
+        "bench:ops": "node --expose-gc ./bench/ops.js",
+        "bench": "npm run bench:speed && npm run bench:heap && npm run bench:ops"
+    },
+    "engines": {
+        "node": ">=12.6"
+    },
+    "dependencies": {
+        "stringifyit": "github:Tamik/stringifyit#staging-branch"
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.23",
+        "@types/node": "^15.12.5",
+        "benchmark": "^2.1.4",
+        "faker": "^5.1.0",
+        "gh-pages": "^3.2.3",
+        "hash-object": "^0.1.7",
+        "jest": "^26.4.2",
+        "node-object-hash": "^1.1.6",
+        "object-hash": "^1.1.5",
+        "prettier": "^2.3.2",
+        "ts-jest": "^26.4.1",
+        "typescript": "^4.3.4"
+    }
+}
