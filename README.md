@@ -14,7 +14,7 @@ $ npm install node-hashit --save
 
 ## Features
 
--   Wrote on TypeScript;
+-   Written on TypeScript;
 -   Supports Node.js >= 12.6.0;
 -   Supports `Map`/`WeakMap`, `Set`/`WeakSet` and typed arrays;
 -   Supports algorithms and encodings from Node.js `crypto` module;
