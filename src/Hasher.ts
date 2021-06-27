@@ -1,11 +1,11 @@
-import crypto, {Hash, HexBase64Latin1Encoding, Utf8AsciiLatin1Encoding} from 'crypto';
+import crypto, {Hash, BinaryToTextEncoding, CharacterEncoding} from 'crypto';
 
 import type {HasherOptions, IHasher} from './types';
 import {stringifyValue} from './utils';
 
 const DEFAULT_ALGORITHM: string = 'md5';
-const DEFAULT_INPUT_ENCODING: Utf8AsciiLatin1Encoding = 'utf8';
-const DEFAULT_OUTPUT_ENCODING: HexBase64Latin1Encoding = 'hex';
+const DEFAULT_INPUT_ENCODING: CharacterEncoding = 'utf8';
+const DEFAULT_OUTPUT_ENCODING: BinaryToTextEncoding = 'hex';
 
 /**
  * Provides an interface to hash any value.
@@ -30,7 +30,7 @@ class Hasher implements IHasher {
     /**
      * Updates hash with stringified value.
      */
-    public update(value: unknown, inputEncoding?: Utf8AsciiLatin1Encoding): void {
+    public update(value: unknown, inputEncoding?: CharacterEncoding): void {
         if (value instanceof Buffer) {
             this.hasher.update(value);
         } else {
@@ -43,7 +43,7 @@ class Hasher implements IHasher {
     /**
      * @see {@link https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding}
      */
-    public digest(outputEncoding?: HexBase64Latin1Encoding): string {
+    public digest(outputEncoding?: BinaryToTextEncoding): string {
         const encoding = outputEncoding || this.options.outputEncoding;
 
         return this.hasher.digest(encoding || encoding === null ? encoding : DEFAULT_OUTPUT_ENCODING);
