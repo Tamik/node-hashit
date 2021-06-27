@@ -11,7 +11,14 @@ const DEFAULT_OUTPUT_ENCODING: HexBase64Latin1Encoding = 'hex';
  * Provides an interface to hash any value.
  */
 class Hasher implements IHasher {
+    /**
+     * Hasher options.
+     */
     public readonly options: HasherOptions;
+
+    /**
+     * Accumulative buffer.
+     */
     public readonly hasher: Hash;
 
     constructor(options: HasherOptions = {}) {
